@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { width: 400px; padding: 10px; font-family: Arial, sans-serif; background: #fff; margin: 0; }
+        h2 { margin-top: 0; font-size: 16px; border-bottom: 2px solid #333; padding-bottom: 5px; }
+        .ptc-form-group { margin-bottom: 10px; }
+        .ptc-form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 2px; color: #000; }
+        .ptc-form-group input, .ptc-form-group select { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 3px; box-sizing: border-box; font-size: 12px; }
+        .ptc-flex-row { display: flex; gap: 8px; }
+        .ptc-flex-row > div { flex: 1; }
+        .ptc-btn { display: inline-block; padding: 8px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px; text-align: center; }
+        .ptc-btn-secondary { background: #e0e0e0; color: #333; width: 100%; }
+        .ptc-btn-action { background: #007bff; color: white; width: 100%; padding: 12px; font-size: 14px; margin-top: 10px; position: sticky; bottom: 0; }
+        #scroll-container { max-height: 500px; overflow-y: auto; padding-right: 5px; padding-bottom: 10px; }
+        hr { border: 0; border-top: 1px solid #ddd; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <h2>PTC Data Manager</h2>
+    <div id="scroll-container">
+        <div class="ptc-flex-row" style="margin-bottom: 5px;">
+            <button class="ptc-btn ptc-btn-secondary" id="ptc-upload-resume-btn">📄 Upload Resume</button>
+            <input type="file" id="ptc-resume-file" style="display:none;" accept=".pdf,.doc,.docx">
+            <button class="ptc-btn ptc-btn-secondary" id="ptc-upload-cover-btn">📄 Upload Cover</button>
+            <input type="file" id="ptc-cover-file" style="display:none;" accept=".pdf,.doc,.docx">
+        </div>
+        <div class="ptc-flex-row" style="margin-bottom: 15px; font-size: 10px; color: green; font-weight: bold;">
+            <div id="ptc-resume-status" style="flex: 1; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">No Resume Saved</div>
+            <div id="ptc-cover-status" style="flex: 1; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">No Cover Saved</div>
+        </div>
+
+        <div class="ptc-form-group"><label>First Name</label><input type="text" id="ptc-firstName"></div>
+        <div class="ptc-form-group"><label>Last Name</label><input type="text" id="ptc-lastName"></div>
+        <div class="ptc-form-group"><label>Email</label><input type="email" id="ptc-email"></div>
+        <div class="ptc-flex-row">
+            <div class="ptc-form-group" style="flex: 0.4;"><label>Code (+92)</label><input type="text" id="ptc-countryCode"></div>
+            <div class="ptc-form-group" style="flex: 0.6;"><label>Phone Number</label><input type="text" id="ptc-phone"></div>
+        </div>
+        <div class="ptc-form-group"><label>Address Line 1</label><input type="text" id="ptc-address1"></div>
+        <div class="ptc-form-group"><label>Address Line 2</label><input type="text" id="ptc-address2"></div>
+        <div class="ptc-flex-row">
+            <div class="ptc-form-group"><label>City</label><input type="text" id="ptc-city"></div>
+            <div class="ptc-form-group"><label>State</label><input type="text" id="ptc-state"></div>
+            <div class="ptc-form-group"><label>Zip</label><input type="text" id="ptc-zip"></div>
+        </div>
+        <div class="ptc-form-group"><label>Country</label><input type="text" id="ptc-country"></div>
+        <hr>
+        <div class="ptc-form-group"><label>Total Work Exp (Years)</label><input type="number" id="ptc-workExp"></div>
+        <div class="ptc-form-group"><label>Current Fixed CTC</label><input type="text" id="ptc-currentCTC"></div>
+        <div class="ptc-form-group"><label>Notice Period (Days)</label><input type="number" id="ptc-noticePeriod"></div>
+        <div class="ptc-form-group"><label>Last Working Day (LWD)</label><input type="date" id="ptc-lwd"></div>
+        <div class="ptc-form-group"><label>Current Job Location</label><input type="text" id="ptc-currentLocation"></div>
+        <div class="ptc-form-group"><label>Preferred Job Location</label><input type="text" id="ptc-prefLocation"></div>
+        <div class="ptc-form-group"><label>Preferred Start Date</label><input type="date" id="ptc-startDate"></div>
+        <div class="ptc-form-group"><label>Source (LinkedIn, etc.)</label><input type="text" id="ptc-source"></div>
+        <div class="ptc-form-group"><label>Former Employee Last Date</label><input type="date" id="ptc-formerDate"></div>
+        <div class="ptc-form-group"><label>Native Mandarin?</label><select id="ptc-mandarin"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+        <div class="ptc-form-group"><label>English Level</label><select id="ptc-englishLevel"><option value="Beginner">Beginner</option><option value="Intermediate">Intermediate</option><option value="Advanced">Advanced</option><option value="Fluent">Fluent</option><option value="Native">Native</option></select></div>
+        <div class="ptc-form-group"><label>Non-Compete?</label><select id="ptc-nonCompete"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+        <div class="ptc-form-group"><label>Open to Relocation?</label><select id="ptc-relocation"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+        <div class="ptc-form-group"><label>Disability Status</label><select id="ptc-disabilityStatus"><option value="no">No, I don't have a disability</option><option value="yes">Yes, I have a disability</option><option value="decline">I do not wish to answer</option></select></div>
+        <div class="ptc-form-group"><label>Veteran Status</label><select id="ptc-veteranStatus"><option value="no">Not a veteran</option><option value="yes">Protected veteran</option></select></div>
+        <div class="ptc-form-group"><label>Sponsorship?</label><select id="ptc-sponsorship"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+        <div class="ptc-form-group"><label>Legally Permitted to Work?</label><select id="ptc-legallyPermitted"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+    </div>
+    
+    <button class="ptc-btn ptc-btn-action" id="ptc-action-btn">Loading...</button>
+
+    <script src="popup.js"></script>
+</body>
+</html>

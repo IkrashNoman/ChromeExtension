@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "PTC Job Auto-Filler",
+  "version": "1.2",
+  "permissions": ["storage", "activeTab", "scripting", "unlimitedStorage", "tabs"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.eightfold.ai/*", "*://careers.ptc.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}
